@@ -4,6 +4,7 @@ LABEL maintainer=stevesbrain,realies
 ENV BITLBEE_COMMIT 921ea8b
 ENV DISCORD_COMMIT fd8213f
 ENV FACEBOOK_COMMIT 553593d
+ENV PULSESMS_COMMIT a7b88d8
 ENV SKYPE_COMMIT 2290013
 ENV SLACK_COMMIT 6ce21a1
 ENV STEAM_COMMIT a6444d2
@@ -59,6 +60,16 @@ RUN cd /root \
 	&& make \
 	&& make install \
 	&& if [ "$STRIP" == "true" ]; then strip /usr/local/lib/bitlbee/facebook.so; fi
+
+
+FROM builder as pulse-builder
+RUN cd /root \
+	&& git clone -n https://github.com/EionRobb/purple-pulsesms \
+	&& cd purple-pulsesms \
+	&& git checkout ${PULSESMS_COMMIT} \
+	&& make \
+	&& make install \
+	&& if [ "$STRIP" == "true" ]; then strip /usr/lib/purple-2/libpulsesms.so; fi
 
 
 FROM builder as skype-builder
@@ -136,6 +147,8 @@ COPY --from=discord-builder /usr/local/lib/bitlbee/discord.* /usr/local/lib/bitl
 COPY --from=discord-builder /usr/local/share/bitlbee/discord-help.txt /usr/local/share/bitlbee/discord-help.txt
 
 COPY --from=facebook-builder /usr/local/lib/bitlbee/facebook.* /usr/local/lib/bitlbee/
+
+COPY --from=pulse-builder /usr/lib/purple-2/libpulsesms.so /usr/lib/purple-2/libpulsesms.so
 
 COPY --from=skype-builder /usr/lib/purple-2/libskypeweb.so /usr/lib/purple-2/libskypeweb.so
 COPY --from=skype-builder /usr/share/pixmaps/pidgin/emotes/skype/theme /usr/share/pixmaps/pidgin/emotes/skype/theme

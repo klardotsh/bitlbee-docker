@@ -13,6 +13,7 @@ Minimal build of latest BitlBee on latest Alpine with latest plugins for:
 | [libpurple-bonjour](https://pkgs.alpinelinux.org/package/v3.8/community/x86_64/libpurple-bonjour) | 2.13.0 | bonjour |
 | [libpurple-oscar](https://pkgs.alpinelinux.org/package/v3.8/community/x86_64/libpurple-oscar) | 2.13.0 | aim, icq, oscar |
 | [libpurple-xmpp](https://pkgs.alpinelinux.org/package/v3.8/community/x86_64/libpurple-xmpp) | 2.13.0 | jabber, xmpp | 
+| [purple-pulsesms](https://github.com/EionRobb/purple-pulsesms) | git | pulsesms |
 | [skype4pidgin](https://github.com/EionRobb/skype4pidgin) | 1.5 | skype |
 | [slack-libpurple](https://github.com/dylex/slack-libpurple) | 0.1  | slack |
 | [telegram-purple](https://github.com/majn/telegram-purple) | 1.3.1  | telegram |
